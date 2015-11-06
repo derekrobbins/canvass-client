@@ -1,5 +1,7 @@
 import Login from 'js/login';
+import Ui from 'js/ui';
 
 (function() {
-//    Login.init();
+    Ui.init();
+    Login.init();
 })();

@@ -1,8 +1,15 @@
+import Ui from 'js/ui';
+import Globals from 'js/globals';
+
 let Login = {};
-let promise = 'new Promise()';
+
+function onLoginSubmit(resolve, reject) {
+    // authenticate user/pass
+    Ui.goToPage(Globals.mainWindow, Globals.leftClass);
+}
 
 Login.init = function() {
-    return promise;
+    return Ui.Login.init().then(onLoginSubmit);
 };
 
 export default Login;

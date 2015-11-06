@@ -6,17 +6,26 @@
     <link rel="stylesheet" type="text/css" href="style/main.css" />
 </head>
 <body>
-    <div id="login">
-        <p id="settings" class="fa fa-gear fa-2x"></p>
+    <div id="settings" class="page margins">
+        <p>settings</p>
+        <p class="thin">server's address</p>
+        <input type="text" id="server-address" />
+        <button type="submit" class="goback">back</button>
+    </div>
+    <div id="login" class="page margins active">
+        <p class="fa fa-gear fa-lg goto goto-settings" data-goto="#settings" data-direction="top"></p>
         <p class="heading">hello.</p>
         <form>
             <p class="thin">username</p>
-            <input type="text" />
+            <input type="text" id="user" />
             <p class="thin">password</p>
-            <input type="password" />
+            <input type="password" id="password" />
             <button type="submit">login</button>
         </form>
     </div>
+    <div id="main" class="page margins">
+    </div>
+    <script src="js/jquery-2.1.4.min.js"></script>
     <script src="build/main.bundle.js"></script>
 </body>
 </html>
