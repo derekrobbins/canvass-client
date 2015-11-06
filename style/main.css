@@ -1,0 +1,57 @@
+body {
+    font-family: helvetica;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    color: #666;
+    background: #eee;
+}
+p {
+    margin: 1em 0;
+    padding: 0;
+    line-height: 1.5;
+}
+input {
+    margin: -0.5em 0 0;
+    padding: .5em;
+    font-size: 1em;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+button {
+    margin: 1em 0;
+    font-size: 1em;
+    padding: 1em;
+    border-radius: 0;
+    box-sizing: border-box;
+    width: 100%;
+    background: #ccc;
+    border: 1px solid #aaa;
+}
+
+.heading {
+    font-size: 2em;
+}
+.thin {
+    font-family: 'helvetica neue';
+    font-weight: 200;
+}
+
+/* Login screen */
+#login {
+    max-width: 800px;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+#login button {
+    margin-top: 3em;
+}
+#settings {
+    position: absolute;
+    top: 0.25em;
+    right: 0.25em;
+    margin: 0;
+}

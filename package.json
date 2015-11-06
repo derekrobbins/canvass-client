@@ -1,0 +1,34 @@
+{
+  "name": "canvass-client",
+  "version": "0.0.1",
+  "description": "A chat client",
+  "main": "app/main.js",
+  "dependencies": {
+    "babel-preset-es2015": "^6.0.15",
+    "gulp-babel": "^6.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jspm": "^0.5.4",
+    "gulp-less": "^3.0.3",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-watch": "^4.3.5",
+    "jspm": "^0.16.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "derekrobbins.me:/home/git/canvass-client.git"
+  },
+  "author": "Derek Robbins",
+  "license": "ISC",
+  "jspm": {
+    "dependencies": {},
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  }
+}
