@@ -64,4 +64,12 @@ Ui.Login.init = () => {
     });
 };
 
+Ui.Login.getUserName = () => {
+    return $(Globals.Login.form).get(0).elements.user.value;
+};
+
+Ui.Login.getPassword = () => {
+    return $(Globals.Login.form).get(0).elements.password.value;
+};
+
 export default Ui;

@@ -1,11 +1,23 @@
 import Ui from 'js/ui';
 import Globals from 'js/globals';
+import Settings from 'js/settings';
 
 let Login = {};
 
 function onLoginSubmit(resolve, reject) {
     // authenticate user/pass
-    Ui.goToPage(Globals.mainWindow, Globals.leftClass);
+    if(location.hash === '#noauth') {
+        Ui.goToPage(Globals.mainWindow, Globals.leftClass);
+    }
+    $.ajax({
+        url: Settings.host,
+        method: 'post',
+        dataType: 'json',
+        data: {
+            user: Ui.Login.getUserName(),
+            password: Ui.Login.getPassword()
+        }
+    });
 }
 
 Login.init = function() {

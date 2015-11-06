@@ -1,3 +1,7 @@
 let Settings = {};
 
-default export Settings;
+Settings.init = () => {
+
+};
+
+export default Settings;
