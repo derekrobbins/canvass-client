@@ -1,23 +1,10 @@
 import Globals from 'js/globals';
+import PageManager from 'js/pagemanager.js';
+
 let Ui = {
     Login: {}
 };
-let history = [];
 let activePage;
-
-function getOppositeDirection(direction) {
-    let map = {};
-    map[Globals.topClass] = Globals.bottomClass;
-    map[Globals.bottomClass] = Globals.topClass;
-    map[Globals.leftClass] = Globals.rightClass;
-    map[Globals.rightClass] = Globals.leftClass;
-    return map[direction];
-}
-
-function doPageTransition(data) {
-    data.to.addClass(Globals.activeClass);
-    data.from.removeClass(Globals.directionClasses).removeClass(Globals.activeClass);
-}
 
 function setUpClickHandlers() {
     $(Globals.gotoSelector).click((e) => {
@@ -28,7 +15,6 @@ function setUpClickHandlers() {
         let active = el.closest(Globals.pageSelector);
 
         activePage = active;
-        Ui.goToPage(to, direction);
     });
 
     $(Globals.goBackSelector).click((e) => {
@@ -37,22 +23,9 @@ function setUpClickHandlers() {
 }
 
 Ui.init = () => {
+    Ui.pageManager = new PageManager();
+    Ui.pageManager.goToPage(Globals.Pages.login);
     setUpClickHandlers();
-    activePage = $('.page.active');
-};
-
-Ui.goToPage = (toSelector, direction) => {
-    let to = $(toSelector);
-    history.push({
-        from: to,
-        direction: getOppositeDirection(direction),
-        to: activePage
-    });
-    doPageTransition({
-        from: activePage,
-        direction: direction,
-        to: to
-    });
 };
 
 Ui.Login.init = () => {

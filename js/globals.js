@@ -1,14 +1,10 @@
 let Globals = {
-    // UI generic classes and selectors
-    pageSelector: '.page',
-    gotoSelector: '.goto',
-    goBackSelector: '.goback',
-    topClass: 'top',
-    bottomClass: 'bottom',
-    leftClass: 'left',
-    rightClass: 'right',
-    activeClass: 'active',
-    mainWindow: '#main',
+    // Pages
+    Pages: {
+        login: 'login',
+        settings: 'settings',
+        chat: 'chat'
+    },
 
     // UI Login selectors
     Login: {

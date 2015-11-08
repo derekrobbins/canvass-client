@@ -32,6 +32,9 @@ button {
     border: 1px solid #aaa;
 }
 
+.center {
+    text-align: center;
+}
 .heading {
     font-size: 2em;
 }
@@ -39,40 +42,17 @@ button {
     font-family: 'helvetica neue';
     font-weight: 200;
 }
-.page {
-    display: none;
-    position: absolute;
-}
-.page.active {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-.page.margins {
+.margins {
     max-width: 800px;
     padding: 0 1em;
     box-sizing: border-box;
     margin: auto;
 }
-.page.top {
-    top: -100%;
-}
-.page.bottom {
-    top: 100%;
-}
 
 /* Login screen */
-#login {
-    text-align: center;
-}
-#login button {
-    margin-top: 3em;
-}
-#login .goto-settings {
+.goto-settings {
     position: absolute;
     top: .5em;
     right: .5em;
     margin: 0;
-}
-#settings {
 }

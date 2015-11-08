@@ -3,28 +3,35 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style/fontawesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="style/pagemanager.css" />
     <link rel="stylesheet" type="text/css" href="style/main.css" />
 </head>
 <body>
-    <div id="settings" class="page margins">
-        <p>settings</p>
-        <p class="thin">server's address</p>
-        <input type="text" id="server-address" />
-        <button type="submit" class="goback">back</button>
+    <div class="pm-page" data-pm-name="settings">
+        <div class="pm-container margins">
+            <p>settings</p>
+            <p class="thin">server's address</p>
+            <input type="text" id="server-address" />
+            <button type="submit" class="pm-go-back">back</button>
+        </div>
     </div>
-    <div id="login" class="page margins active">
-        <p class="fa fa-gear fa-lg goto goto-settings" data-goto="#settings" data-direction="top"></p>
-        <p class="heading">Canvass</p>
-        <form>
-            <p class="thin">username</p>
-            <input type="text" name="user" />
-            <p class="thin">password</p>
-            <input type="password" name="password" />
-            <button type="submit">login</button>
-        </form>
+    <div id="login" class="pm-page" data-pm-name="login">
+        <div class="pm-container margins center">
+            <p class="fa fa-gear fa-lg pm-goto goto-settings" data-pm-goto="settings" data-direction="top"></p>
+            <p class="heading">Canvass</p>
+            <form>
+                <p class="thin">username</p>
+                <input type="text" name="user" />
+                <p class="thin">password</p>
+                <input type="password" name="password" />
+                <button type="submit">login</button>
+            </form>
+        </div>
     </div>
-    <div id="main" class="page margins">
-        Main window
+    <div class="pm-page" data-pm-name="chat">
+        <div class="pm-container margins">
+            Chat window
+        </div>
     </div>
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="build/main.bundle.js"></script>

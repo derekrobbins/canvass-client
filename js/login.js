@@ -7,7 +7,8 @@ let Login = {};
 function onLoginSubmit(resolve, reject) {
     // authenticate user/pass
     if(location.hash === '#noauth') {
-        Ui.goToPage(Globals.mainWindow, Globals.leftClass);
+        Ui.pageManager.goToPage(Globals.Pages.chat);
+        return;
     }
     $.ajax({
         url: Settings.host,
