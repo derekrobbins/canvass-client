@@ -30,6 +30,7 @@ button {
     width: 100%;
     background: #ccc;
     border: 1px solid #aaa;
+    color: #333;
 }
 ul {
     margin: 0;
@@ -57,6 +58,15 @@ ul {
     padding: 0 1em;
     box-sizing: border-box;
     margin: auto;
+}
+
+.error {
+    border: 1px solid #faa;
+    background-color: #fcc;
+    color: #a66;
+    display: none;
+    padding: .25em 1em;
+
 }
 
 /* Login screen */
@@ -104,4 +114,5 @@ ul {
     color: #aaa;
     float: right;
     font-size: .75em;
+    line-height: 1;
 }

@@ -1,5 +1,5 @@
 import Login from 'js/login';
-import Ui from 'js/ui';
+import Ui from 'js/ui/ui';
 import Settings from 'js/settings';
 import Globals from 'js/globals';
 

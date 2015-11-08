@@ -1,8 +1,9 @@
-import ChatWindow from 'js/chatwindow';
+import ChatRoom from 'js/chatroom';
+import Users from 'js/users';
 
 let Chat = {}
 Chat.init = function() {
-    new ChatWindow();
+
 };
 
 export default Chat;

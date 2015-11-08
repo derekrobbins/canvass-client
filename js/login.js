@@ -1,30 +1,31 @@
-import Ui from 'js/ui';
+import Ui from 'js/ui/ui';
 import Globals from 'js/globals';
 import Settings from 'js/settings';
 import Chat from 'js/chat';
+import Users from 'js/users';
+import Host from 'js/host';
 
 let Login = {};
 
-function onLoginSubmit(resolve, reject) {
-    // authenticate user/pass
-    if(location.hash === '#noauth') {
-        Ui.pageManager.goToPage(Globals.Pages.chat);
-        Chat.init();
+function onLoginSubmit(e) {
+    let username = Ui.Login.getUserName();
+    let password = Ui.Login.getPassword();
+    e.preventDefault();
+    if(!username || !password) {
+        Ui.displayError(Globals.Errors.messages.enterUserName);
         return;
     }
-    $.ajax({
-        url: Settings.host,
-        method: 'post',
-        dataType: 'json',
-        data: {
-            user: Ui.Login.getUserName(),
-            password: Ui.Login.getPassword()
-        }
-    });
+    if(!Settings.get(Globals.Settings.host)) {
+        let user = Users.add({name: username, host: new Host('noauth')});
+        Users.setActiveUser(user.getKey());
+        Ui.pageManager.goToPage(Globals.Pages.chat);
+        Chat.init();
+    }
+    Ui.hideError();
 }
 
 Login.init = function() {
-    return Ui.Login.init().then(onLoginSubmit);
+    Ui.Login.init(onLoginSubmit);
 };
 
 export default Login;

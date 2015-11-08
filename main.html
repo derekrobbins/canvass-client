@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style/main.css" />
 </head>
 <body>
+    <div id="global-error" class="error margins"></div>
     <div class="pm-page" data-pm-name="settings">
         <div class="pm-container margins">
             <p>settings</p>
@@ -21,7 +22,7 @@
             <p class="heading">Canvass</p>
             <form>
                 <p class="thin">username</p>
-                <input type="text" name="user" />
+                <input type="text" name="user" autocomplete="off"/>
                 <p class="thin">password</p>
                 <input type="password" name="password" />
                 <button type="submit">login</button>
@@ -41,7 +42,7 @@
             <ul class="conversation-window">
             </ul>
             <form>
-                <input type="text" name="input" />
+                <input type="text" name="input" autocomplete="off" autofocus="true" />
                 <button type="submit" class="hidden">ok</button>
             </form>
         </div>

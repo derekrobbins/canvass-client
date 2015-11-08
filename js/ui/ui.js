@@ -1,6 +1,7 @@
 import Globals from 'js/globals';
 import PageManager from 'js/pagemanager.js';
 
+let globalError = $(Globals.Errors.locations.global);
 let Ui = {
     Login: {}
 };
@@ -10,13 +11,16 @@ Ui.init = () => {
     Ui.pageManager.goToPage(Globals.Pages.login);
 };
 
-Ui.Login.init = () => {
-    return new Promise(function(resolve, reject) {
-        $(Globals.Login.form).submit((e) => {
-            e.preventDefault();
-            resolve();
-        });
-    });
+Ui.displayError = (message, location = globalError) => {
+    location.html(message).show();
+};
+
+Ui.hideError = (location = globalError) => {
+    location.html('').hide();
+}
+
+Ui.Login.init = (onSubmit) => {
+    $(Globals.Login.form).submit(onSubmit);
 };
 
 Ui.Login.getUserName = () => {
