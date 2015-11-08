@@ -446,105 +446,14 @@
 
 (['1'], [], function($__System) {
 
-$__System.register("2", ["3", "4"], function (_export) {
-    var _createClass, _classCallCheck, hosts, Host;
-
-    return {
-        setters: [function (_) {
-            _createClass = _["default"];
-        }, function (_2) {
-            _classCallCheck = _2["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            hosts = {};
-
-            Host = (function () {
-                /*
-                 *  address: string
-                 */
-
-                function Host(address) {
-                    _classCallCheck(this, Host);
-
-                    if (hosts[address]) {
-                        return hosts[address];
-                    }
-                    this.setAddress(address);
-                    hosts[address] = this;
-                    this._onMessageCallbacks = [];
-                    return this;
-                }
-
-                /*
-                 *  address: string
-                 */
-
-                _createClass(Host, [{
-                    key: "setAddress",
-                    value: function setAddress(address) {
-                        this.address = address;
-                    }
-                }, {
-                    key: "getAddress",
-                    value: function getAddress() {
-                        return this.address;
-                    }
-
-                    /*
-                     *  message: {
-                     *      user: User,
-                     *      content: string,
-                     *      room: string
-                     *  }
-                     */
-                }, {
-                    key: "submitMessage",
-                    value: function submitMessage(message) {
-                        // send message to server
-
-                        // temporary until we get a server hooked up
-                        message.timestamp = Date.now();
-                        message.from = message.user.getName();
-                        this.receivedMessage(message);
-                    }
-
-                    /*
-                     *  message: {
-                     *      user: User,
-                     *      content: string,
-                     *      room: string,
-                     *      timestamp: int (unix timestamp)
-                     *  }
-                     */
-                }, {
-                    key: "receivedMessage",
-                    value: function receivedMessage(message) {
-                        this._onMessageCallbacks.forEach(function (item) {
-                            item.cb.call(item.self, message);
-                        });
-                    }
-                }, {
-                    key: "onMessage",
-                    value: function onMessage(cb, self) {
-                        this._onMessageCallbacks.push({ cb: cb, self: self });
-                    }
-                }]);
-
-                return Host;
-            })();
-
-            _export("default", Host);
-        }
-    };
-});
-$__System.register('5', [], function (_export) {
+$__System.register('2', ['3'], function (_export) {
     'use strict';
 
-    var Templates;
+    var Member, Templates;
     return {
-        setters: [],
+        setters: [function (_) {
+            Member = _['default'];
+        }],
         execute: function () {
             Templates = {
                 chatWindow: {
@@ -552,11 +461,12 @@ $__System.register('5', [], function (_export) {
                         text: function text(message) {
                             var dt = new Date(message.timestamp);
                             var minutes = dt.getMinutes();
+                            var member = Member.getMember(message.from);
                             if (minutes < 10) {
                                 minutes = '0' + minutes;
                             }
                             var time = dt.getHours() + ':' + minutes;
-                            return '<li>\n                    <p class="time thin">' + time + '</p>\n                    <p class="name bold">' + message.from + '</p>\n                    <p class="content">' + message.content + '</p>\n                </li>';
+                            return '<li data-user-key="' + member.getMemberKey() + '">\n                    <p class="time thin">' + time + '</p>\n                    <p class="name bold">' + member.getHandle() + '</p>\n                    <p class="content">' + message.content + '</p>\n                </li>';
                         }
                     }
                 }
@@ -566,156 +476,43 @@ $__System.register('5', [], function (_export) {
         }
     };
 });
-$__System.register("6", ["3", "4"], function (_export) {
-    var _createClass, _classCallCheck, hosts, Host;
+$__System.register('3', ['4', '5', '6'], function (_export) {
+    var Host, _createClass, _classCallCheck, members, Member;
 
     return {
-        setters: [function (_) {
-            _createClass = _["default"];
-        }, function (_2) {
-            _classCallCheck = _2["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            hosts = {};
-
-            Host = (function () {
-                /*
-                 *  address: string
-                 */
-
-                function Host(address) {
-                    _classCallCheck(this, Host);
-
-                    if (hosts[address]) {
-                        return hosts[address];
-                    }
-                    this.setAddress(address);
-                    hosts[address] = this;
-                    this._onMessageCallbacks = [];
-                    return this;
-                }
-
-                /*
-                 *  address: string
-                 */
-
-                _createClass(Host, [{
-                    key: "setAddress",
-                    value: function setAddress(address) {
-                        this.address = address;
-                    }
-                }, {
-                    key: "getAddress",
-                    value: function getAddress() {
-                        return this.address;
-                    }
-
-                    /*
-                     *  message: {
-                     *      user: User,
-                     *      content: string,
-                     *      room: string
-                     *  }
-                     */
-                }, {
-                    key: "submitMessage",
-                    value: function submitMessage(message) {
-                        // send message to server
-
-                        // temporary until we get a server hooked up
-                        message.timestamp = Date.now();
-                        message.from = message.user.getName();
-                        this.receivedMessage(message);
-                    }
-
-                    /*
-                     *  message: {
-                     *      user: User,
-                     *      content: string,
-                     *      room: string,
-                     *      timestamp: int (unix timestamp)
-                     *  }
-                     */
-                }, {
-                    key: "receivedMessage",
-                    value: function receivedMessage(message) {
-                        this._onMessageCallbacks.forEach(function (item) {
-                            item.cb.call(item.self, message);
-                        });
-                    }
-                }, {
-                    key: "onMessage",
-                    value: function onMessage(cb, self) {
-                        this._onMessageCallbacks.push({ cb: cb, self: self });
-                    }
-                }]);
-
-                return Host;
-            })();
-
-            _export("default", Host);
-        }
-    };
-});
-$__System.register('7', ['3', '4', '6', '8', '9'], function (_export) {
-    var _createClass, _classCallCheck, Host, ChatRoom, _Object$keys, Users, users, activeKey, User;
-
-    /*
-     *  name: string
-     *  host: string
-     */
-    function generateUserKey(name, host) {
-        return host + name;
-    }return {
-        setters: [function (_) {
+        setters: [function (_3) {
+            Host = _3['default'];
+        }, function (_) {
             _createClass = _['default'];
         }, function (_2) {
             _classCallCheck = _2['default'];
-        }, function (_5) {
-            Host = _5['default'];
-        }, function (_4) {
-            ChatRoom = _4['default'];
-        }, function (_3) {
-            _Object$keys = _3['default'];
         }],
         execute: function () {
             'use strict';
 
-            Users = {};
-            users = {};
-            activeKey = '';
+            members = [];
 
-            User = (function () {
+            Member = (function () {
 
                 /*
                  *  options: {
-                 *      name: String
-                 *      host: Host
+                 *      handle: string,
+                 *      host: Host,
+                 *      memberKey: string
                  *  }
                  */
 
-                function User(options) {
-                    _classCallCheck(this, User);
+                function Member(options) {
+                    _classCallCheck(this, Member);
 
-                    this.name = options.name;
+                    this.setHandle(options.handle);
                     this.setHost(new Host(options.host));
-                    this.userKey = generateUserKey(options.name, options.host.getAddress());
-                    this.initRooms();
+                    this.setMemberKey(options.memberKey);
+                    members[this.getMemberKey()] = this;
+                    return this;
                 }
 
-                _createClass(User, [{
-                    key: 'getName',
-                    value: function getName() {
-                        return this.name;
-                    }
-                }, {
-                    key: 'getKey',
-                    value: function getKey() {
-                        return this.userKey;
-                    }
-                }, {
+                _createClass(Member, [{
                     key: 'getHost',
                     value: function getHost() {
                         return this.host;
@@ -730,6 +527,503 @@ $__System.register('7', ['3', '4', '6', '8', '9'], function (_export) {
                         this.host = host;
                     }
                 }, {
+                    key: 'getHandle',
+                    value: function getHandle() {
+                        return this.handle;
+                    }
+                }, {
+                    key: 'setHandle',
+                    value: function setHandle(handle) {
+                        this.handle = handle;
+                    }
+                }, {
+                    key: 'getMemberKey',
+                    value: function getMemberKey() {
+                        return this.userKey;
+                    }
+                }, {
+                    key: 'setMemberKey',
+                    value: function setMemberKey(key) {
+                        this.userKey = key;
+                    }
+                }], [{
+                    key: 'getMember',
+                    value: function getMember(key) {
+                        return members[key];
+                    }
+                }]);
+
+                return Member;
+            })();
+
+            _export('default', Member);
+        }
+    };
+});
+$__System.register("4", ["5", "6"], function (_export) {
+    var _createClass, _classCallCheck, hosts, Host;
+
+    return {
+        setters: [function (_) {
+            _createClass = _["default"];
+        }, function (_2) {
+            _classCallCheck = _2["default"];
+        }],
+        execute: function () {
+            "use strict";
+
+            hosts = {};
+
+            Host = (function () {
+                /*
+                 *  address: string
+                 */
+
+                function Host(address) {
+                    _classCallCheck(this, Host);
+
+                    if (hosts[address]) {
+                        return hosts[address];
+                    }
+                    this.setAddress(address);
+                    hosts[address] = this;
+                    this._onMessageCallbacks = [];
+                    return this;
+                }
+
+                /*
+                 *  address: string
+                 */
+
+                _createClass(Host, [{
+                    key: "setAddress",
+                    value: function setAddress(address) {
+                        this.address = address;
+                    }
+                }, {
+                    key: "getAddress",
+                    value: function getAddress() {
+                        return this.address;
+                    }
+
+                    /*
+                     *  message: {
+                     *      user: User,
+                     *      content: string,
+                     *      room: string
+                     *  }
+                     */
+                }, {
+                    key: "submitMessage",
+                    value: function submitMessage(message) {
+                        // send message to server
+
+                        // temporary until we get a server hooked up
+                        message.timestamp = Date.now();
+                        message.from = message.user.getMemberKey();
+                        this.receivedMessage(message);
+                    }
+
+                    /*
+                     *  message: {
+                     *      from: string, (member key)
+                     *      content: string,
+                     *      room: string,
+                     *      timestamp: int (unix timestamp)
+                     *  }
+                     */
+                }, {
+                    key: "receivedMessage",
+                    value: function receivedMessage(message) {
+                        this._onMessageCallbacks.forEach(function (item) {
+                            item.cb.call(item.self, message);
+                        });
+                    }
+                }, {
+                    key: "onMessage",
+                    value: function onMessage(cb, self) {
+                        this._onMessageCallbacks.push({ cb: cb, self: self });
+                    }
+                }]);
+
+                return Host;
+            })();
+
+            _export("default", Host);
+        }
+    };
+});
+$__System.registerDynamic("7", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    if (typeof it != 'function')
+      throw TypeError(it + ' is not a function!');
+    return it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("8", ["7"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var aFunction = req('7');
+  module.exports = function(fn, that, length) {
+    aFunction(fn);
+    if (that === undefined)
+      return fn;
+    switch (length) {
+      case 1:
+        return function(a) {
+          return fn.call(that, a);
+        };
+      case 2:
+        return function(a, b) {
+          return fn.call(that, a, b);
+        };
+      case 3:
+        return function(a, b, c) {
+          return fn.call(that, a, b, c);
+        };
+    }
+    return function() {
+      return fn.apply(that, arguments);
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("9", ["a"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var isObject = req('a');
+  module.exports = function(it) {
+    if (!isObject(it))
+      throw TypeError(it + ' is not an object!');
+    return it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("a", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    return typeof it === 'object' ? it !== null : typeof it === 'function';
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("b", ["c", "a", "9", "8"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var getDesc = req('c').getDesc,
+      isObject = req('a'),
+      anObject = req('9');
+  var check = function(O, proto) {
+    anObject(O);
+    if (!isObject(proto) && proto !== null)
+      throw TypeError(proto + ": can't set as prototype!");
+  };
+  module.exports = {
+    set: Object.setPrototypeOf || ('__proto__' in {} ? function(test, buggy, set) {
+      try {
+        set = req('8')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
+        set(test, []);
+        buggy = !(test instanceof Array);
+      } catch (e) {
+        buggy = true;
+      }
+      return function setPrototypeOf(O, proto) {
+        check(O, proto);
+        if (buggy)
+          O.__proto__ = proto;
+        else
+          set(O, proto);
+        return O;
+      };
+    }({}, false) : undefined),
+    check: check
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("d", ["e", "b"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $def = req('e');
+  $def($def.S, 'Object', {setPrototypeOf: req('b').set});
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("f", ["d", "10"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  req('d');
+  module.exports = req('10').Object.setPrototypeOf;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("11", ["f"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": req('f'),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("12", ["c"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = req('c');
+  module.exports = function create(P, D) {
+    return $.create(P, D);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("13", ["12"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": req('12'),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14", ["13", "11"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  var _Object$create = req('13')["default"];
+  var _Object$setPrototypeOf = req('11')["default"];
+  exports["default"] = function(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = _Object$create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      _Object$setPrototypeOf ? _Object$setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  };
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("15", [], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toString = {}.toString;
+  module.exports = function(it) {
+    return toString.call(it).slice(8, -1);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("16", ["15"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var cof = req('15');
+  module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it) {
+    return cof(it) == 'String' ? it.split('') : Object(it);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("17", ["16", "18"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var IObject = req('16'),
+      defined = req('18');
+  module.exports = function(it) {
+    return IObject(defined(it));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("19", ["17", "1a"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toIObject = req('17');
+  req('1a')('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor) {
+    return function getOwnPropertyDescriptor(it, key) {
+      return $getOwnPropertyDescriptor(toIObject(it), key);
+    };
+  });
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1b", ["c", "19"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = req('c');
+  req('19');
+  module.exports = function getOwnPropertyDescriptor(it, key) {
+    return $.getDesc(it, key);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1c", ["1b"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": req('1b'),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1d", ["1c"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  var _Object$getOwnPropertyDescriptor = req('1c')["default"];
+  exports["default"] = function get(_x, _x2, _x3) {
+    var _again = true;
+    _function: while (_again) {
+      var object = _x,
+          property = _x2,
+          receiver = _x3;
+      _again = false;
+      if (object === null)
+        object = Function.prototype;
+      var desc = _Object$getOwnPropertyDescriptor(object, property);
+      if (desc === undefined) {
+        var parent = Object.getPrototypeOf(object);
+        if (parent === null) {
+          return undefined;
+        } else {
+          _x = parent;
+          _x2 = property;
+          _x3 = receiver;
+          _again = true;
+          desc = parent = undefined;
+          continue _function;
+        }
+      } else if ("value" in desc) {
+        return desc.value;
+      } else {
+        var getter = desc.get;
+        if (getter === undefined) {
+          return undefined;
+        }
+        return getter.call(receiver);
+      }
+    }
+  };
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.register('1e', ['3', '4', '5', '6', '14', '20', '1d', '1f'], function (_export) {
+    var Member, Host, _createClass, _classCallCheck, _inherits, _Object$keys, _get, ChatRoom, Users, users, activeKey, User;
+
+    return {
+        setters: [function (_6) {
+            Member = _6['default'];
+        }, function (_5) {
+            Host = _5['default'];
+        }, function (_2) {
+            _createClass = _2['default'];
+        }, function (_3) {
+            _classCallCheck = _3['default'];
+        }, function (_) {
+            _inherits = _['default'];
+        }, function (_4) {
+            _Object$keys = _4['default'];
+        }, function (_d) {
+            _get = _d['default'];
+        }, function (_f) {
+            ChatRoom = _f['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            Users = {};
+            users = {};
+            activeKey = '';
+
+            User = (function (_Member) {
+                _inherits(User, _Member);
+
+                /*
+                 *  options: {
+                 *      handle: string,
+                 *      host: Host,
+                 *      userKey: string
+                 *  }
+                 */
+
+                function User(options) {
+                    _classCallCheck(this, User);
+
+                    _get(Object.getPrototypeOf(User.prototype), 'constructor', this).call(this, options);
+                    this.initRooms();
+                }
+
+                _createClass(User, [{
                     key: 'initRooms',
                     value: function initRooms() {
                         var _this = this;
@@ -757,13 +1051,11 @@ $__System.register('7', ['3', '4', '6', '8', '9'], function (_export) {
                 }]);
 
                 return User;
-            })();
-
-            ;
+            })(Member);
 
             Users.add = function (options) {
                 var user = new User(options);
-                users[user.getKey()] = user;
+                users[user.getMemberKey()] = user;
                 return user;
             };
 
@@ -779,20 +1071,20 @@ $__System.register('7', ['3', '4', '6', '8', '9'], function (_export) {
         }
     };
 });
-$__System.register('a', ['3', '4', '5', '7', 'b'], function (_export) {
-    var _createClass, _classCallCheck, Templates, Users, Globals, ChatRoomUi;
+$__System.register('21', ['2', '5', '6', '22', '1e'], function (_export) {
+    var Templates, _createClass, _classCallCheck, Globals, Users, ChatRoomUi;
 
     return {
-        setters: [function (_) {
+        setters: [function (_4) {
+            Templates = _4['default'];
+        }, function (_) {
             _createClass = _['default'];
         }, function (_2) {
             _classCallCheck = _2['default'];
-        }, function (_4) {
-            Templates = _4['default'];
         }, function (_3) {
-            Users = _3['default'];
-        }, function (_b) {
-            Globals = _b['default'];
+            Globals = _3['default'];
+        }, function (_e) {
+            Users = _e['default'];
         }],
         execute: function () {
             'use strict';
@@ -886,7 +1178,7 @@ $__System.register('a', ['3', '4', '5', '7', 'b'], function (_export) {
         }
     };
 });
-$__System.register('8', ['3', '4', 'a'], function (_export) {
+$__System.register('1f', ['5', '6', '21'], function (_export) {
     var _createClass, _classCallCheck, ChatRoomUi, ChatRoom;
 
     return {
@@ -894,8 +1186,8 @@ $__System.register('8', ['3', '4', 'a'], function (_export) {
             _createClass = _['default'];
         }, function (_2) {
             _classCallCheck = _2['default'];
-        }, function (_a) {
-            ChatRoomUi = _a['default'];
+        }, function (_3) {
+            ChatRoomUi = _3['default'];
         }],
         execute: function () {
             'use strict';
@@ -920,7 +1212,7 @@ $__System.register('8', ['3', '4', 'a'], function (_export) {
                 }
 
                 /*
-                 *  content: String
+                 *  content: string
                  */
 
                 _createClass(ChatRoom, [{
@@ -991,15 +1283,13 @@ $__System.register('8', ['3', '4', 'a'], function (_export) {
         }
     };
 });
-$__System.register('c', ['7', '8'], function (_export) {
+$__System.register('23', ['1f'], function (_export) {
   'use strict';
 
-  var Users, ChatRoom, Chat;
+  var ChatRoom, Chat;
   return {
-    setters: [function (_2) {
-      Users = _2['default'];
-    }, function (_) {
-      ChatRoom = _['default'];
+    setters: [function (_f) {
+      ChatRoom = _f['default'];
     }],
     execute: function () {
       Chat = {};
@@ -1010,7 +1300,7 @@ $__System.register('c', ['7', '8'], function (_export) {
     }
   };
 });
-$__System.register('d', [], function (_export) {
+$__System.register('24', [], function (_export) {
     'use strict';
 
     var Settings, settings;
@@ -1041,7 +1331,7 @@ $__System.register('d', [], function (_export) {
         }
     };
 });
-$__System.registerDynamic("e", [], true, function(req, exports, module) {
+$__System.registerDynamic("25", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1057,7 +1347,7 @@ $__System.registerDynamic("e", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("f", [], true, function(req, exports, module) {
+$__System.registerDynamic("10", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1069,7 +1359,7 @@ $__System.registerDynamic("f", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("10", [], true, function(req, exports, module) {
+$__System.registerDynamic("26", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1081,13 +1371,13 @@ $__System.registerDynamic("10", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("11", ["10", "f"], true, function(req, exports, module) {
+$__System.registerDynamic("e", ["26", "10"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var global = req('10'),
-      core = req('f'),
+  var global = req('26'),
+      core = req('10'),
       PROTOTYPE = 'prototype';
   var ctx = function(fn, that) {
     return function() {
@@ -1139,16 +1429,16 @@ $__System.registerDynamic("11", ["10", "f"], true, function(req, exports, module
   return module.exports;
 });
 
-$__System.registerDynamic("12", ["11", "f", "e"], true, function(req, exports, module) {
+$__System.registerDynamic("1a", ["e", "10", "25"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $def = req('11'),
-      core = req('f'),
-      fails = req('e');
+  var $def = req('e'),
+      core = req('10'),
+      fails = req('25');
   module.exports = function(KEY, exec) {
-    var $def = req('11'),
+    var $def = req('e'),
         fn = (core.Object || {})[KEY] || Object[KEY],
         exp = {};
     exp[KEY] = exec(fn);
@@ -1160,7 +1450,7 @@ $__System.registerDynamic("12", ["11", "f", "e"], true, function(req, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("13", [], true, function(req, exports, module) {
+$__System.registerDynamic("18", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1174,12 +1464,12 @@ $__System.registerDynamic("13", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("14", ["13"], true, function(req, exports, module) {
+$__System.registerDynamic("27", ["18"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var defined = req('13');
+  var defined = req('18');
   module.exports = function(it) {
     return Object(defined(it));
   };
@@ -1187,13 +1477,13 @@ $__System.registerDynamic("14", ["13"], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("15", ["14", "12"], true, function(req, exports, module) {
+$__System.registerDynamic("28", ["27", "1a"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var toObject = req('14');
-  req('12')('keys', function($keys) {
+  var toObject = req('27');
+  req('1a')('keys', function($keys) {
     return function keys(it) {
       return $keys(toObject(it));
     };
@@ -1202,31 +1492,31 @@ $__System.registerDynamic("15", ["14", "12"], true, function(req, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("16", ["15", "f"], true, function(req, exports, module) {
+$__System.registerDynamic("29", ["28", "10"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  req('15');
-  module.exports = req('f').Object.keys;
+  req('28');
+  module.exports = req('10').Object.keys;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("9", ["16"], true, function(req, exports, module) {
+$__System.registerDynamic("20", ["29"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": req('16'),
+    "default": req('29'),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("4", [], true, function(req, exports, module) {
+$__System.registerDynamic("6", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1242,7 +1532,7 @@ $__System.registerDynamic("4", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("17", [], true, function(req, exports, module) {
+$__System.registerDynamic("c", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1264,12 +1554,12 @@ $__System.registerDynamic("17", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("18", ["17"], true, function(req, exports, module) {
+$__System.registerDynamic("2a", ["c"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $ = req('17');
+  var $ = req('c');
   module.exports = function defineProperty(it, key, desc) {
     return $.setDesc(it, key, desc);
   };
@@ -1277,26 +1567,26 @@ $__System.registerDynamic("18", ["17"], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("19", ["18"], true, function(req, exports, module) {
+$__System.registerDynamic("2b", ["2a"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": req('18'),
+    "default": req('2a'),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3", ["19"], true, function(req, exports, module) {
+$__System.registerDynamic("5", ["2b"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   "use strict";
-  var _Object$defineProperty = req('19')["default"];
+  var _Object$defineProperty = req('2b')["default"];
   exports["default"] = (function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -1321,7 +1611,7 @@ $__System.registerDynamic("3", ["19"], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.register('1a', ['3', '4', '9'], function (_export) {
+$__System.register('2c', ['5', '6', '20'], function (_export) {
     var _createClass, _classCallCheck, _Object$keys, Page, PageManager;
 
     return {
@@ -1422,7 +1712,7 @@ $__System.register('1a', ['3', '4', '9'], function (_export) {
         }
     };
 });
-$__System.register('b', [], function (_export) {
+$__System.register('22', [], function (_export) {
     'use strict';
 
     var Globals;
@@ -1464,15 +1754,15 @@ $__System.register('b', [], function (_export) {
         }
     };
 });
-$__System.register('1b', ['b', '1a'], function (_export) {
+$__System.register('2d', ['22', '2c'], function (_export) {
     'use strict';
 
     var Globals, PageManager, globalError, Ui;
     return {
-        setters: [function (_b) {
-            Globals = _b['default'];
-        }, function (_a) {
-            PageManager = _a['default'];
+        setters: [function (_) {
+            Globals = _['default'];
+        }, function (_c) {
+            PageManager = _c['default'];
         }],
         execute: function () {
             globalError = $(Globals.Errors.locations.global);
@@ -1513,10 +1803,10 @@ $__System.register('1b', ['b', '1a'], function (_export) {
         }
     };
 });
-$__System.register('1c', ['2', '7', '1b', 'b', 'd', 'c'], function (_export) {
+$__System.register('2e', ['4', '22', '23', '24', '2d', '1e'], function (_export) {
     'use strict';
 
-    var Host, Users, Ui, Globals, Settings, Chat, Login;
+    var Host, Globals, Chat, Settings, Ui, Users, Login;
 
     function onLoginSubmit(e) {
         var username = Ui.Login.getUserName();
@@ -1527,8 +1817,11 @@ $__System.register('1c', ['2', '7', '1b', 'b', 'd', 'c'], function (_export) {
             return;
         }
         if (!Settings.get(Globals.Settings.host)) {
-            var user = Users.add({ name: username, host: new Host('noauth') });
-            Users.setActiveUser(user.getKey());
+            var temphost = 'noauth';
+            var tempMemberKey = 'abcd';
+
+            var user = Users.add({ handle: username, host: new Host(temphost), memberKey: tempMemberKey });
+            Users.setActiveUser(user.getMemberKey());
             Ui.pageManager.goToPage(Globals.Pages.chat);
             Chat.init();
         }
@@ -1536,18 +1829,18 @@ $__System.register('1c', ['2', '7', '1b', 'b', 'd', 'c'], function (_export) {
     }
 
     return {
-        setters: [function (_2) {
-            Host = _2['default'];
+        setters: [function (_4) {
+            Host = _4['default'];
         }, function (_) {
-            Users = _['default'];
-        }, function (_b) {
-            Ui = _b['default'];
-        }, function (_b2) {
-            Globals = _b2['default'];
+            Globals = _['default'];
+        }, function (_3) {
+            Chat = _3['default'];
+        }, function (_2) {
+            Settings = _2['default'];
         }, function (_d) {
-            Settings = _d['default'];
-        }, function (_c) {
-            Chat = _c['default'];
+            Ui = _d['default'];
+        }, function (_e) {
+            Users = _e['default'];
         }],
         execute: function () {
             Login = {};
@@ -1559,19 +1852,19 @@ $__System.register('1c', ['2', '7', '1b', 'b', 'd', 'c'], function (_export) {
         }
     };
 });
-$__System.register('1', ['1c', '1b', 'd', 'b'], function (_export) {
+$__System.register('1', ['22', '24', '2e', '2d'], function (_export) {
     'use strict';
 
-    var Login, Ui, Settings, Globals;
+    var Globals, Settings, Login, Ui;
     return {
-        setters: [function (_c) {
-            Login = _c['default'];
-        }, function (_b) {
-            Ui = _b['default'];
+        setters: [function (_2) {
+            Globals = _2['default'];
+        }, function (_) {
+            Settings = _['default'];
+        }, function (_e) {
+            Login = _e['default'];
         }, function (_d) {
-            Settings = _d['default'];
-        }, function (_b2) {
-            Globals = _b2['default'];
+            Ui = _d['default'];
         }],
         execute: function () {
 

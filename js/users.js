@@ -1,40 +1,25 @@
 import ChatRoom from 'js/chatroom';
-import Host from 'js/Host';
+import Host from 'js/host';
+import Member from 'js/member';
 
 let Users = {};
 let users = {};
 let activeKey = '';
 
-class User {
+class User extends Member{
 
     /*
      *  options: {
-     *      name: String
-     *      host: Host
+     *      handle: string,
+     *      host: Host,
+     *      userKey: string
      *  }
      */
     constructor(options) {
-        this.name = options.name;
-        this.setHost(new Host(options.host));
-        this.userKey = generateUserKey(options.name, options.host.getAddress());
+        super(options);
         this.initRooms();
     }
-    getName() {
-        return this.name;
-    }
-    getKey() {
-        return this.userKey;
-    }
-    getHost() {
-        return this.host;
-    }
 
-    /*
-     *  host: Host
-     */
-    setHost(host) {
-        this.host = host;
-    }
     initRooms() {
         let rooms = {
             public: [
@@ -60,17 +45,9 @@ class User {
     }
 }
 
-/*
- *  name: string
- *  host: string
- */
-function generateUserKey(name, host) {
-    return host + name;
-};
-
 Users.add = (options) => {
     let user = new User(options);
-    users[user.getKey()] = user;
+    users[user.getMemberKey()] = user;
     return user;
 };
 

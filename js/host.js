@@ -36,13 +36,13 @@ class Host {
 
         // temporary until we get a server hooked up
         message.timestamp = Date.now();
-        message.from = message.user.getName();
+        message.from = message.user.getMemberKey();
         this.receivedMessage(message);
     }
 
     /*
      *  message: {
-     *      user: User,
+     *      from: string, (member key)
      *      content: string,
      *      room: string,
      *      timestamp: int (unix timestamp)

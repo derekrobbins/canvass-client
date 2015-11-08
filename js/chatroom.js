@@ -17,7 +17,7 @@ class ChatRoom {
     }
 
     /*
-     *  content: String
+     *  content: string
      */
     addMessageToChat(content) {
         this.ui.addMessageToChat(content);

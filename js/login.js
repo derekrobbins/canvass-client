@@ -16,8 +16,11 @@ function onLoginSubmit(e) {
         return;
     }
     if(!Settings.get(Globals.Settings.host)) {
-        let user = Users.add({name: username, host: new Host('noauth')});
-        Users.setActiveUser(user.getKey());
+        let temphost = 'noauth';
+        let tempMemberKey = 'abcd';
+
+        let user = Users.add({ handle: username, host: new Host(temphost), memberKey: tempMemberKey });
+        Users.setActiveUser(user.getMemberKey());
         Ui.pageManager.goToPage(Globals.Pages.chat);
         Chat.init();
     }
