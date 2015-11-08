@@ -19,7 +19,7 @@ function onLoginSubmit(e) {
         let temphost = 'noauth';
         let tempMemberKey = 'abcd';
 
-        let user = Users.add({ handle: username, host: new Host(temphost), memberKey: tempMemberKey });
+        let user = Users.add({ name: username, host: new Host(temphost), memberKey: tempMemberKey });
         Users.setActiveUser(user.getMemberKey());
         Ui.pageManager.goToPage(Globals.Pages.chat);
         Chat.init();

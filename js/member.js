@@ -12,7 +12,7 @@ class Member {
      *  }
      */
     constructor(options) {
-        this.setHandle(options.handle);
+        this.setName(options.name);
         this.setHost(new Host(options.host));
         this.setMemberKey(options.memberKey);
         members[this.getMemberKey()] = this;
@@ -29,10 +29,16 @@ class Member {
         this.host = host;
     }
     getHandle() {
-        return this.handle;
+        return this.handle || this.name;
     }
     setHandle(handle) {
         this.handle = handle;
+    }
+    getName() {
+        return this.name;
+    }
+    setName(name) {
+        this.name = name;
     }
     getMemberKey() {
         return this.userKey;

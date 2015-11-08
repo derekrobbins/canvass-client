@@ -505,7 +505,7 @@ $__System.register('3', ['4', '5', '6'], function (_export) {
                 function Member(options) {
                     _classCallCheck(this, Member);
 
-                    this.setHandle(options.handle);
+                    this.setName(options.name);
                     this.setHost(new Host(options.host));
                     this.setMemberKey(options.memberKey);
                     members[this.getMemberKey()] = this;
@@ -529,12 +529,22 @@ $__System.register('3', ['4', '5', '6'], function (_export) {
                 }, {
                     key: 'getHandle',
                     value: function getHandle() {
-                        return this.handle;
+                        return this.handle || this.name;
                     }
                 }, {
                     key: 'setHandle',
                     value: function setHandle(handle) {
                         this.handle = handle;
+                    }
+                }, {
+                    key: 'getName',
+                    value: function getName() {
+                        return this.name;
+                    }
+                }, {
+                    key: 'setName',
+                    value: function setName(name) {
+                        this.name = name;
                     }
                 }, {
                     key: 'getMemberKey',
@@ -1820,7 +1830,7 @@ $__System.register('2e', ['4', '22', '23', '24', '2d', '1e'], function (_export)
             var temphost = 'noauth';
             var tempMemberKey = 'abcd';
 
-            var user = Users.add({ handle: username, host: new Host(temphost), memberKey: tempMemberKey });
+            var user = Users.add({ name: username, host: new Host(temphost), memberKey: tempMemberKey });
             Users.setActiveUser(user.getMemberKey());
             Ui.pageManager.goToPage(Globals.Pages.chat);
             Chat.init();
