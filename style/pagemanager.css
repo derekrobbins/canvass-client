@@ -9,3 +9,6 @@
 .pm-show {
     display: block;
 }
+.pm-container {
+    height: 100%;
+}

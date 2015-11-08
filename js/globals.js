@@ -5,6 +5,8 @@ let Globals = {
         settings: 'settings',
         chat: 'chat'
     },
+    windowTemplateSelector: '#window-template',
+    windowContainerSelector: '#windows',
 
     // UI Login selectors
     Login: {

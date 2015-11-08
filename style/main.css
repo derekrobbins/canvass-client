@@ -31,7 +31,14 @@ button {
     background: #ccc;
     border: 1px solid #aaa;
 }
+ul {
+    margin: 0;
+    list-style-type: none;
+}
 
+.hidden {
+    display: none;
+}
 .center {
     text-align: center;
 }
@@ -41,6 +48,9 @@ button {
 .thin {
     font-family: 'helvetica neue';
     font-weight: 200;
+}
+.bold {
+    font-weight: bold;
 }
 .margins {
     max-width: 800px;
@@ -55,4 +65,43 @@ button {
     top: .5em;
     right: .5em;
     margin: 0;
+}
+
+/* Chat window */
+.window-list {
+    width: 200px;
+    float: left;
+    height: 100%;
+}
+.window {
+    margin-left: 200px;
+    box-sizing: border-box;
+    padding: 1em;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+.conversation-window {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 0 1em;
+    height: calc(100% - 4em);
+    margin-bottom: 2em;
+}
+.conversation-window li {
+    border-bottom: 1px solid #eee;
+    margin-left: -1em;
+    margin-right: -1em;
+    padding: .5em .5em .5em 2.5em;
+}
+.conversation-window p {
+    font-size: .8em;
+    margin: 0;
+}
+.conversation-window .time {
+    color: #aaa;
+    float: right;
+    font-size: .75em;
 }
